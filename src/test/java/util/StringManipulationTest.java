@@ -1,5 +1,6 @@
 package util;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -43,13 +44,21 @@ public class StringManipulationTest {
     @Test
     public void test_csv_file_creation() {
         String expectedOutput = SUCCESS_CSV;
+        input = "test";
         assertEquals(expectedOutput, createCSVFile(input));
     }
 
     @Test
     public void test_void_method_call_to_manipulate_string() {
         StringManipulation mockManipulation = mock(StringManipulation.class);
+        input = "retest";
         manipulateString(input);
         verify(mockManipulation, times(1)).manipulateString(anyString());
     }
+
+    @Test
+    public void test_null_input_string_exception() {
+        Assertions.assertThrows(NullPointerException.class, () -> alternateCase(null));
+    }
+
 }
